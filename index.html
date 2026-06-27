@@ -20,11 +20,11 @@
   --border: rgba(11,29,58,0.12);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Inter',sans-serif;background:#fff;color:var(--navy);overflow-x:hidden}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,29,58,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,162,39,0.2)}
+nav{background:rgba(11,29,58,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,162,39,0.2)}
 .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo-text{font-size:20px;font-weight:800;color:#fff;letter-spacing:-0.5px}
@@ -36,7 +36,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,29,58,0.9
 .nav-cta:hover{background:var(--gold2)!important;color:var(--navy)!important}
 
 /* HERO */
-.hero{min-height:100vh;background:linear-gradient(135deg,#061222 0%,#0B1D3A 50%,#0d2545 100%);display:flex;align-items:center;padding:80px 24px 40px;overflow:hidden;position:relative}
+.hero{min-height:100vh;background:linear-gradient(135deg,#061222 0%,#0B1D3A 50%,#0d2545 100%);display:flex;align-items:center;padding:110px 24px 40px;overflow:hidden;position:relative}
 .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 70% 60% at 70% 50%,rgba(26,127,116,0.12) 0%,transparent 70%);pointer-events:none}
 .hero-grid{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .hero-left{}
@@ -225,55 +225,156 @@ footer{background:#040d1a;padding:40px 24px;text-align:center}
 .slide-right{opacity:0;transform:translateX(40px);transition:opacity 0.7s ease,transform 0.7s ease}
 .slide-right.visible{opacity:1;transform:translateX(0)}
 
+/* SLIDER STYLES - Testimonials & Videos */
+.slider-track-outer{overflow:hidden;width:100%;position:relative}
+.slider-track-outer::before,.slider-track-outer::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+.slider-track-outer::before{left:0;background:linear-gradient(to right,var(--slider-fade,#0B1D3A),transparent)}
+.slider-track-outer::after{right:0;background:linear-gradient(to left,var(--slider-fade,#0B1D3A),transparent)}
+.slider-track{display:flex;gap:20px;animation:slideLeft 40s linear infinite;width:max-content}
+.slider-track:hover{animation-play-state:paused}
+.slider-track-reverse{animation:slideRight 45s linear infinite}
+.slider-track-reverse:hover{animation-play-state:paused}
+@keyframes slideLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes slideRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+.slide-wa-bubble{background:#fff;border-radius:12px;padding:20px 22px;width:340px;flex-shrink:0;position:relative}
+.slide-wa-bubble::before{content:'';position:absolute;top:16px;left:-7px;width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:7px solid #fff}
+.slide-video-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;overflow:hidden;width:300px;flex-shrink:0;cursor:pointer;transition:border-color 0.3s}
+.slide-video-card:hover{border-color:var(--gold)}
+.slide-video-thumb{height:150px;overflow:hidden;position:relative;background:#000}
+.slide-video-thumb img{width:100%;height:100%;object-fit:cover;opacity:0.85}
+.slide-play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:rgba(255,255,255,0.95);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.slide-play-icon{width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:16px solid var(--navy);margin-left:4px}
+.slide-video-info{padding:12px 16px}
+.slide-video-info h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px}
+.slide-video-info p{font-size:11px;color:rgba(255,255,255,0.5)}
+
 /* MOBILE */
 @media(max-width:768px){
-  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .revision-value-grid{grid-template-columns:1fr 1fr!important}
+  #mockbank > .section-inner > div{display:block!important}
+  #mockbank > .section-inner > div > div:last-child{margin-top:28px;perspective:none!important}
+  #mockbank [style*="rotateY"]{transform:none!important;box-shadow:0 8px 24px rgba(0,0,0,0.3)!important}
+
+  /* Global */
+  body{overflow-x:hidden}
+  .section{padding:56px 16px}
+
+  /* Nav */
+  .nav-links{display:none}
+  .nav-inner{padding:0 16px}
+
+  /* Countdown */
+  .countdown-strip{flex-direction:column;gap:6px;padding:8px 12px;text-align:center}
+  .countdown-label{font-size:11px}
+  .countdown-timer{gap:4px}
+  .countdown-unit{min-width:38px;padding:3px 6px}
+  .countdown-unit strong{font-size:15px}
+  #site-header [style*="color:var(--gold);font-size:13px"]{font-size:11px}
+
+  /* Hero */
+  .hero{padding:120px 16px 48px}
+  .hero-grid{grid-template-columns:1fr;gap:32px}
   .hero-right{display:none}
+  .hero-h1{font-size:30px}
+  .hero-sub{font-size:15px}
+  .hero-ctas{flex-direction:column}
+  .btn-primary,.btn-secondary{width:100%;justify-content:center;text-align:center}
+  .hero-trust{gap:12px;justify-content:center}
+  .trust-stat strong{font-size:18px}
+  .offer-pills{gap:6px}
+  .offer-pill{font-size:12px;padding:5px 10px}
+
+  /* Offer Stack */
   .offer-stack{grid-template-columns:1fr}
+  .total-value-box .your-price{font-size:40px}
+
+  /* Revision Batch value grid */
+  [style*="grid-template-columns:repeat(3,1fr)"].revision-value{grid-template-columns:1fr!important}
+
+  /* Pricing */
   .pricing-grid{grid-template-columns:1fr}
   .price-card.featured{transform:none}
-  .books-grid{grid-template-columns:repeat(2,1fr)}
-  .wa-grid{grid-template-columns:1fr}
-  .video-grid{grid-template-columns:1fr}
+  .price-card{padding:24px 20px}
+
+  /* Mock Bank section */
+  #mockbank{padding:56px 16px!important}
+  #mockbank [style*="grid-template-columns:1fr 1fr"]{display:block!important}
+  #mockbank [style*="grid-template-columns:1fr 1fr"] > div:last-child{margin-top:32px}
+  #mockbank [style*="perspective:800px"]{perspective:none!important}
+  #mockbank [style*="transform:rotateY"]{transform:none!important}
+  #mockbank [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+
+  /* Books */
+  .books-section{padding:56px 16px}
+  .books-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .bundle-cta-box{padding:28px 20px}
+  .bundle-now{font-size:40px}
+
+  /* Founder */
   .founder-grid{grid-template-columns:1fr}
-  .founder-stats-overlay{position:relative;bottom:auto;right:auto;margin-top:16px}
-  .nav-links{display:none}
+  .founder-stats-overlay{position:relative;bottom:auto;right:auto;margin-top:16px;grid-template-columns:repeat(2,1fr)}
   .founder-credentials{grid-template-columns:1fr}
+  .founder-photo{max-height:360px;object-position:top}
+
+  /* Testimonials */
+  .wa-grid{display:none}
+  .video-grid{display:none}
+
+  /* FAQ */
+  .faq-q{font-size:14px;padding:16px 18px}
+
+  /* Final CTA */
+  .final-cta{padding:72px 16px}
+  .final-ctas{flex-direction:column;align-items:center}
+
+  /* Footer */
+  .footer-links{gap:12px}
 }
 
+/* Always show sliders for testimonials */
+.wa-slider-section{display:block}
+.video-slider-section{display:block}
+.wa-grid-desktop,.video-grid-desktop{display:none!important}
+
 /* COUNTDOWN */
-.countdown-strip{background:#1A1A2E;border-bottom:1px solid rgba(201,162,39,0.2);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
-.countdown-label{color:rgba(255,255,255,0.7);font-size:13px;font-weight:500}
-.countdown-timer{display:flex;gap:8px;align-items:center}
-.countdown-unit{text-align:center;background:rgba(201,162,39,0.15);border:1px solid rgba(201,162,39,0.3);border-radius:6px;padding:4px 8px;min-width:44px}
-.countdown-unit strong{display:block;font-size:20px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums}
+.countdown-strip{background:#0d1f3c;border-bottom:1px solid rgba(201,162,39,0.3);padding:9px 24px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.countdown-label{color:rgba(255,255,255,0.8);font-size:13px;font-weight:600}
+.countdown-timer{display:flex;gap:6px;align-items:center}
+.countdown-unit{text-align:center;background:rgba(201,162,39,0.15);border:1px solid rgba(201,162,39,0.35);border-radius:6px;padding:4px 10px;min-width:46px}
+.countdown-unit strong{display:block;font-size:18px;font-weight:900;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1.2}
 .countdown-unit span{font-size:9px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.8px}
-.countdown-sep{color:var(--gold);font-size:18px;font-weight:700;margin-bottom:10px}
+.countdown-sep{color:var(--gold);font-size:16px;font-weight:700;line-height:1}
 </style>
 </head>
 <body>
 
-<!-- COUNTDOWN STRIP -->
-<div class="countdown-strip" style="margin-top:0">
-  <span class="countdown-label">⚡ Early Bird ends in</span>
-  <div class="countdown-timer">
-    <div class="countdown-unit"><strong id="cd-d">07</strong><span>Days</span></div>
-    <span class="countdown-sep">:</span>
-    <div class="countdown-unit"><strong id="cd-h">14</strong><span>Hours</span></div>
-    <span class="countdown-sep">:</span>
-    <div class="countdown-unit"><strong id="cd-m">32</strong><span>Min</span></div>
-    <span class="countdown-sep">:</span>
-    <div class="countdown-unit"><strong id="cd-s">18</strong><span>Sec</span></div>
+<!-- FIXED HEADER: Countdown + Nav stacked -->
+<div id="site-header" style="position:fixed;top:0;left:0;right:0;z-index:100">
+  <!-- Countdown bar -->
+  <div class="countdown-strip">
+    <span class="countdown-label">⚡ Early Bird ends in</span>
+    <div class="countdown-timer">
+      <div class="countdown-unit"><strong id="cd-d">07</strong><span>Days</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><strong id="cd-h">14</strong><span>Hours</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><strong id="cd-m">32</strong><span>Min</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><strong id="cd-s">18</strong><span>Sec</span></div>
+    </div>
+    <span style="color:var(--gold);font-size:13px;font-weight:700">→ Secure your spot at €99</span>
   </div>
-  <span style="color:var(--gold);font-size:13px;font-weight:700">→ Secure your spot at €99</span>
-</div>
-
-<!-- NAV -->
-<nav>
+  <!-- Nav -->
+  <nav style="position:relative;top:auto;left:auto;right:auto;z-index:auto">
   <div class="nav-inner">
     <a class="logo" href="#">
       <img src="data:image/png;base64,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" alt="IMAT Sensei Logo" style="height:44px;width:auto;border-radius:4px;">
     </a>
+    <button id="mob-menu-btn" onclick="document.getElementById('mob-menu').classList.toggle('open')" style="display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px" aria-label="Menu">
+      <span style="display:block;width:22px;height:2px;background:#fff;border-radius:2px"></span>
+      <span style="display:block;width:22px;height:2px;background:#fff;border-radius:2px"></span>
+      <span style="display:block;width:22px;height:2px;background:#fff;border-radius:2px"></span>
+    </button>
     <div class="nav-links">
       <a href="#books">Books</a>
       <a href="#revision">Revision Batch</a>
@@ -285,6 +386,22 @@ footer{background:#040d1a;padding:40px 24px;text-align:center}
     </div>
   </div>
 </nav>
+</div><!-- /site-header -->
+<!-- MOBILE MENU -->
+<div id="mob-menu" style="display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(11,29,58,0.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px">
+  <a href="#books" onclick="document.getElementById('mob-menu').classList.remove('open')" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none">Books</a>
+  <a href="#revision" onclick="document.getElementById('mob-menu').classList.remove('open')" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none">Revision Batch</a>
+  <a href="https://imatsensei1-ux.github.io/IMAT-Sensei/" target="_blank" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none">Mock Bank</a>
+  <a href="#founder" onclick="document.getElementById('mob-menu').classList.remove('open')" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none">About</a>
+  <a href="#testimonials" onclick="document.getElementById('mob-menu').classList.remove('open')" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none">Results</a>
+  <a href="#faq" onclick="document.getElementById('mob-menu').classList.remove('open')" style="color:#fff;font-size:22px;font-weight:700;text-decoration:none">FAQ</a>
+  <a href="https://wa.me/message/SCJN34K5T4C3E1" style="background:var(--gold);color:var(--navy);padding:14px 32px;border-radius:8px;font-size:18px;font-weight:800;text-decoration:none">Enroll Now →</a>
+</div>
+<style>
+#mob-menu-btn{display:none}
+#mob-menu.open{display:flex!important}
+@media(max-width:768px){#mob-menu-btn{display:flex!important}}
+</style>
 
 <!-- HERO -->
 <section class="hero">
@@ -317,6 +434,16 @@ footer{background:#040d1a;padding:40px 24px;text-align:center}
         <div class="trust-stat"><strong>Sep 2026</strong><span>IMAT Exam</span></div>
         <div class="trust-divider"></div>
         <div class="trust-stat"><strong>4.9★</strong><span>Rated</span></div>
+      </div>
+      <div style="margin-top:20px;display:flex;align-items:center;gap:8px">
+        <div style="display:flex">
+          <div style="width:28px;height:28px;border-radius:50%;background:#059669;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;margin-left:-4px">GI</div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#8B5CF6;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;margin-left:-8px">ND</div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#D97706;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;margin-left:-8px">ZI</div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#0891B2;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;margin-left:-8px">MD</div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#DC2626;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;margin-left:-8px">CH</div>
+        </div>
+        <span style="color:rgba(255,255,255,0.55);font-size:13px">150+ students already enrolled this season</span>
       </div>
     </div>
     <div class="hero-right">
@@ -546,7 +673,7 @@ footer{background:#040d1a;padding:40px 24px;text-align:center}
     <!-- Hormozi Value Stack for Revision Batch -->
     <div style="background:rgba(11,29,58,0.04);border:1.5px solid rgba(201,162,39,0.3);border-radius:16px;padding:32px;margin-bottom:40px">
       <p style="text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:20px">Everything included in every Revision Batch tier</p>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px">
+      <div class="revision-value-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px">
         <div style="display:flex;align-items:flex-start;gap:8px;padding:12px;background:white;border-radius:8px;box-shadow:0 2px 8px rgba(11,29,58,0.06)">
           <span style="font-size:18px;flex-shrink:0">🎥</span>
           <div><div style="font-size:13px;font-weight:700;color:var(--navy)">6 Weeks Live Revision Classes</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Value €149</div></div>
@@ -681,71 +808,15 @@ footer{background:#040d1a;padding:40px 24px;text-align:center}
     <h2 class="section-title">Real Students. Real Scores. Real Admissions.</h2>
     <p class="section-sub">These are actual messages from students who used IMAT Sensei resources to prepare for the exam.</p>
 
-    <div class="wa-grid fade-in">
-      <div class="wa-bubble">
-        <div class="wa-bubble-header">
-          <div class="wa-avatar" style="background:#059669">AN</div>
-          <div><div class="wa-name">Anmol</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
-          <span class="wa-time">8:49 PM</span>
-        </div>
-        <p class="wa-text">I can't explain in words how grateful I am for your course. It literally made it so much easier for me to study directly from your material instead of wasting hours searching for the right resources. The topical tests after every chapter and mock tests every Sunday are a blessing. They are time limited too, which builds speed and efficiency for the actual IMAT.</p>
-        <div class="wa-check">✓✓</div>
-      </div>
-      <div class="wa-bubble">
-        <div class="wa-bubble-header">
-          <div class="wa-avatar" style="background:#8B5CF6">ND</div>
-          <div><div class="wa-name">Nadine</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
-          <span class="wa-time">10:56 PM</span>
-        </div>
-        <p class="wa-text">Before I started following the program, I was all over the place. I was constantly searching for resources and never knew which ones to follow. Since I started, I have become much more confident. Information is sticking better, I know what to focus on, and I can clearly identify the areas where I need more work. The IMAT syllabus is broken down in a clear and structured way. As someone who struggles with anxiety, having that clarity has made a huge difference.</p>
-        <div class="wa-check">✓✓</div>
-      </div>
-      <div class="wa-bubble">
-        <div class="wa-bubble-header">
-          <div class="wa-avatar" style="background:#D97706">MF</div>
-          <div><div class="wa-name">Mohd Faizan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
-          <span class="wa-time">7:57 AM</span>
-        </div>
-        <p class="wa-text">Greetings everyone. Starting this journey, I was very uncertain about almost everything. The market is filled with different platforms selling their courses and it's hard to know what to choose. But iMedSensei made it very easy and accessible to prepare for the IMAT. Not only the quality of the study content, but the dedication, recorded lectures, practice questions, mock tests, and the willingness to answer every query anytime has made the MedSchool dream a real possibility.</p>
-        <div class="wa-check">✓✓</div>
-      </div>
-      <div class="wa-bubble">
-        <div class="wa-bubble-header">
-          <div class="wa-avatar" style="background:#DC2626">ZI</div>
-          <div><div class="wa-name">Zainab Ihsan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
-          <span class="wa-time">10:13 AM</span>
-        </div>
-        <p class="wa-text">Before joining the mentorship program, IMAT felt overwhelming to me. The syllabus was huge and I had no idea where to start. But sir broke everything down into a clear plan with daily targets, subject-wise strategies, and mock tests every week. He taught us to think like IMAT. Critical thinking and logic questions that used to waste 5 minutes, I can now solve in 30 seconds. My confidence went from zero to actually believing I can get a seat. If you are serious about IMAT, this program is worth it.</p>
-        <div class="wa-check">✓✓</div>
-      </div>
-      <div class="wa-bubble">
-        <div class="wa-bubble-header">
-          <div class="wa-avatar" style="background:#0891B2">MD</div>
-          <div><div class="wa-name">Mohamed</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
-          <span class="wa-time">1:13 PM</span>
-        </div>
-        <p class="wa-text">Dr. Yousaf, I attended your IMAT preparation course and the experience was truly outstanding. Your teaching covers all exam topics in great depth with remarkable clarity. The frequent mock exams you provided were invaluable for tracking my progress and building exam-day confidence. Thanks to your dedication, I felt fully prepared and ready to succeed. I highly recommend your course to any student aiming for a top score. Thank you sincerely, Dr. Yousaf.</p>
-        <div class="wa-check">✓✓</div>
-      </div>
-      <div class="wa-bubble">
-        <div class="wa-bubble-header">
-          <div class="wa-avatar" style="background:#7C3AED">CH</div>
-          <div><div class="wa-name">Chaima</div><div style="font-size:11px;color:var(--muted)">Algeria</div></div>
-          <span class="wa-time">3:01 AM</span>
-        </div>
-        <p class="wa-text">Working with you for the IMAT preparation was a fantastic experience. You have such a smooth and simple way of explaining complex topics, which made learning much easier for me. You were incredibly helpful in organizing and breaking down the syllabus. Since I hadn't taken the IMAT exam before, I was completely lost and didn't know where to start. Your guidance gave me the structure and confidence I needed. Thank you so much for all your support.</p>
-        <div class="wa-check">✓✓</div>
-      </div>
-    </div>
-
-    <div class="wa-grid fade-in" style="margin-top:20px">
+    <!-- DESKTOP GRID -->
+    <div class="wa-grid wa-grid-desktop fade-in">
       <div class="wa-bubble">
         <div class="wa-bubble-header">
           <div class="wa-avatar" style="background:#059669">GI</div>
           <div><div class="wa-name">Gianna</div><div style="font-size:11px;color:var(--muted)">Italy</div></div>
           <span class="wa-time">2:30 PM</span>
         </div>
-        <p class="wa-text">The course is really good! I appreciated how every topic was explained clearly and at the right depth for the IMAT. The practice questions after each chapter helped me consolidate what I learned. Highly recommended for anyone serious about getting into Italian medical school.</p>
+        <p class="wa-text">The course is really good! Every topic was explained clearly and at the right depth for the IMAT. The practice questions after each chapter helped me consolidate what I learned. Highly recommended for anyone serious about getting into Italian medical school.</p>
         <div class="wa-check">✓✓</div>
       </div>
       <div class="wa-bubble">
@@ -754,7 +825,63 @@ footer{background:#040d1a;padding:40px 24px;text-align:center}
           <div><div class="wa-name">Luca</div><div style="font-size:11px;color:var(--muted)">Italy</div></div>
           <span class="wa-time">5:15 PM</span>
         </div>
-        <p class="wa-text">Really good course. The structured approach to the IMAT syllabus is exactly what I needed. Yousaf breaks down even the most complex topics in a way that is easy to understand and remember. The mock tests in particular were very useful for getting used to the exam format and timing.</p>
+        <p class="wa-text">Really good course. The structured approach to the IMAT syllabus is exactly what I needed. Yousaf breaks down even the most complex topics in a way that is easy to understand and remember. The mock tests were very useful for getting used to the exam format and timing.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#059669">AN</div>
+          <div><div class="wa-name">Anmol</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">8:49 PM</span>
+        </div>
+        <p class="wa-text">I can't explain in words how grateful I am for your course. It made it so much easier to study directly from your material instead of wasting hours searching for resources. The topical tests after every chapter and timed mock tests every Sunday are a blessing.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#8B5CF6">ND</div>
+          <div><div class="wa-name">Nadine</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
+          <span class="wa-time">10:56 PM</span>
+        </div>
+        <p class="wa-text">Before the program I was all over the place. Since I started I have become much more confident. Information is sticking better, I know what to focus on, and I can clearly identify areas where I need more work. Having that clarity has made a huge difference.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#D97706">MF</div>
+          <div><div class="wa-name">Mohd Faizan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">7:57 AM</span>
+        </div>
+        <p class="wa-text">iMedSensei made it very easy and accessible to prepare for the IMAT. The quality of the study content, dedication, recorded lectures, practice questions, mock tests, and willingness to answer every query anytime has made the MedSchool dream a real possibility.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#DC2626">ZI</div>
+          <div><div class="wa-name">Zainab Ihsan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">10:13 AM</span>
+        </div>
+        <p class="wa-text">Sir broke everything down into a clear plan with daily targets, subject-wise strategies, and mock tests every week. He taught us to think like IMAT. Critical thinking questions that used to waste 5 minutes I can now solve in 30 seconds. If you are serious about IMAT, this is worth it.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+    </div>
+    <div class="wa-grid wa-grid-desktop fade-in" style="margin-top:20px">
+      <div class="wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#0891B2">MD</div>
+          <div><div class="wa-name">Mohamed</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
+          <span class="wa-time">1:13 PM</span>
+        </div>
+        <p class="wa-text">Dr. Yousaf, I attended your IMAT preparation course and the experience was truly outstanding. Your teaching covers all exam topics in great depth with remarkable clarity. The frequent mock exams were invaluable for tracking my progress and building exam-day confidence.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#7C3AED">CH</div>
+          <div><div class="wa-name">Chaima</div><div style="font-size:11px;color:var(--muted)">Algeria</div></div>
+          <span class="wa-time">3:01 AM</span>
+        </div>
+        <p class="wa-text">You have such a smooth and simple way of explaining complex topics, which made learning much easier for me. You were incredibly helpful in organizing and breaking down the syllabus. I was completely lost before and didn't know where to start. Your guidance gave me the structure I needed.</p>
         <div class="wa-check">✓✓</div>
       </div>
       <div class="wa-bubble">
@@ -763,29 +890,366 @@ footer{background:#040d1a;padding:40px 24px;text-align:center}
           <div><div class="wa-name">Muhammad Sultan</div><div style="font-size:11px;color:var(--muted)">India</div></div>
           <span class="wa-time">11:00 AM</span>
         </div>
-        <p class="wa-text">Muhammad Ahmer Zahid from May Batch 2026 here. The program completely changed how I approach the IMAT. I went from feeling lost to having a clear daily plan. The content is exam-focused and every session builds on the previous one. Truly one of the best investments I made for my IMAT preparation.</p>
+        <p class="wa-text">The program completely changed how I approach the IMAT. I went from feeling lost to having a clear daily plan. The content is exam-focused and every session builds on the previous one. Truly one of the best investments I made for my IMAT preparation.</p>
         <div class="wa-check">✓✓</div>
+      </div>
+    </div>
+
+    <!-- MOBILE SLIDER -->
+    <div class="wa-slider-section">
+      <div class="slider-track-outer" style="--slider-fade:#0B1D3A">
+        <div class="slider-track">
+          <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#059669">GI</div>
+          <div><div class="wa-name">Gianna</div><div style="font-size:11px;color:var(--muted)">Italy</div></div>
+          <span class="wa-time">2:30 PM</span>
+        </div>
+        <p class="wa-text">The course is really good! Every topic was explained clearly and at the right depth for the IMAT. The practice questions after each chapter helped me consolidate what I learned. Highly recommended for anyone serious about getting into Italian medical school.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#B45309">LU</div>
+          <div><div class="wa-name">Luca</div><div style="font-size:11px;color:var(--muted)">Italy</div></div>
+          <span class="wa-time">5:15 PM</span>
+        </div>
+        <p class="wa-text">Really good course. The structured approach to the IMAT syllabus is exactly what I needed. Yousaf breaks down even the most complex topics in a way that is easy to understand and remember. The mock tests were very useful for getting used to the exam format and timing.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#059669">AN</div>
+          <div><div class="wa-name">Anmol</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">8:49 PM</span>
+        </div>
+        <p class="wa-text">I can't explain in words how grateful I am for your course. It made it so much easier to study directly from your material instead of wasting hours searching for resources. The topical tests after every chapter and timed mock tests every Sunday are a blessing.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#8B5CF6">ND</div>
+          <div><div class="wa-name">Nadine</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
+          <span class="wa-time">10:56 PM</span>
+        </div>
+        <p class="wa-text">Before the program I was all over the place. Since I started I have become much more confident. Information is sticking better, I know what to focus on, and I can clearly identify areas where I need more work. Having that clarity has made a huge difference.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#D97706">MF</div>
+          <div><div class="wa-name">Mohd Faizan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">7:57 AM</span>
+        </div>
+        <p class="wa-text">iMedSensei made it very easy and accessible to prepare for the IMAT. The quality of the study content, dedication, recorded lectures, practice questions, mock tests, and willingness to answer every query anytime has made the MedSchool dream a real possibility.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#DC2626">ZI</div>
+          <div><div class="wa-name">Zainab Ihsan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">10:13 AM</span>
+        </div>
+        <p class="wa-text">Sir broke everything down into a clear plan with daily targets, subject-wise strategies, and mock tests every week. He taught us to think like IMAT. Critical thinking questions that used to waste 5 minutes I can now solve in 30 seconds. If you are serious about IMAT, this is worth it.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#0891B2">MD</div>
+          <div><div class="wa-name">Mohamed</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
+          <span class="wa-time">1:13 PM</span>
+        </div>
+        <p class="wa-text">Dr. Yousaf, I attended your IMAT preparation course and the experience was truly outstanding. Your teaching covers all exam topics in great depth with remarkable clarity. The frequent mock exams were invaluable for tracking my progress and building exam-day confidence.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#7C3AED">CH</div>
+          <div><div class="wa-name">Chaima</div><div style="font-size:11px;color:var(--muted)">Algeria</div></div>
+          <span class="wa-time">3:01 AM</span>
+        </div>
+        <p class="wa-text">You have such a smooth and simple way of explaining complex topics, which made learning much easier for me. You were incredibly helpful in organizing and breaking down the syllabus. I was completely lost before and didn't know where to start. Your guidance gave me the structure I needed.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#1D4ED8">MS</div>
+          <div><div class="wa-name">Muhammad Sultan</div><div style="font-size:11px;color:var(--muted)">India</div></div>
+          <span class="wa-time">11:00 AM</span>
+        </div>
+        <p class="wa-text">The program completely changed how I approach the IMAT. I went from feeling lost to having a clear daily plan. The content is exam-focused and every session builds on the previous one. Truly one of the best investments I made for my IMAT preparation.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+          <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#059669">GI</div>
+          <div><div class="wa-name">Gianna</div><div style="font-size:11px;color:var(--muted)">Italy</div></div>
+          <span class="wa-time">2:30 PM</span>
+        </div>
+        <p class="wa-text">The course is really good! Every topic was explained clearly and at the right depth for the IMAT. The practice questions after each chapter helped me consolidate what I learned. Highly recommended for anyone serious about getting into Italian medical school.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#B45309">LU</div>
+          <div><div class="wa-name">Luca</div><div style="font-size:11px;color:var(--muted)">Italy</div></div>
+          <span class="wa-time">5:15 PM</span>
+        </div>
+        <p class="wa-text">Really good course. The structured approach to the IMAT syllabus is exactly what I needed. Yousaf breaks down even the most complex topics in a way that is easy to understand and remember. The mock tests were very useful for getting used to the exam format and timing.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#059669">AN</div>
+          <div><div class="wa-name">Anmol</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">8:49 PM</span>
+        </div>
+        <p class="wa-text">I can't explain in words how grateful I am for your course. It made it so much easier to study directly from your material instead of wasting hours searching for resources. The topical tests after every chapter and timed mock tests every Sunday are a blessing.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#8B5CF6">ND</div>
+          <div><div class="wa-name">Nadine</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
+          <span class="wa-time">10:56 PM</span>
+        </div>
+        <p class="wa-text">Before the program I was all over the place. Since I started I have become much more confident. Information is sticking better, I know what to focus on, and I can clearly identify areas where I need more work. Having that clarity has made a huge difference.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#D97706">MF</div>
+          <div><div class="wa-name">Mohd Faizan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">7:57 AM</span>
+        </div>
+        <p class="wa-text">iMedSensei made it very easy and accessible to prepare for the IMAT. The quality of the study content, dedication, recorded lectures, practice questions, mock tests, and willingness to answer every query anytime has made the MedSchool dream a real possibility.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#DC2626">ZI</div>
+          <div><div class="wa-name">Zainab Ihsan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">10:13 AM</span>
+        </div>
+        <p class="wa-text">Sir broke everything down into a clear plan with daily targets, subject-wise strategies, and mock tests every week. He taught us to think like IMAT. Critical thinking questions that used to waste 5 minutes I can now solve in 30 seconds. If you are serious about IMAT, this is worth it.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#0891B2">MD</div>
+          <div><div class="wa-name">Mohamed</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
+          <span class="wa-time">1:13 PM</span>
+        </div>
+        <p class="wa-text">Dr. Yousaf, I attended your IMAT preparation course and the experience was truly outstanding. Your teaching covers all exam topics in great depth with remarkable clarity. The frequent mock exams were invaluable for tracking my progress and building exam-day confidence.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#7C3AED">CH</div>
+          <div><div class="wa-name">Chaima</div><div style="font-size:11px;color:var(--muted)">Algeria</div></div>
+          <span class="wa-time">3:01 AM</span>
+        </div>
+        <p class="wa-text">You have such a smooth and simple way of explaining complex topics, which made learning much easier for me. You were incredibly helpful in organizing and breaking down the syllabus. I was completely lost before and didn't know where to start. Your guidance gave me the structure I needed.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#1D4ED8">MS</div>
+          <div><div class="wa-name">Muhammad Sultan</div><div style="font-size:11px;color:var(--muted)">India</div></div>
+          <span class="wa-time">11:00 AM</span>
+        </div>
+        <p class="wa-text">The program completely changed how I approach the IMAT. I went from feeling lost to having a clear daily plan. The content is exam-focused and every session builds on the previous one. Truly one of the best investments I made for my IMAT preparation.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+        </div>
+      </div>
+      <div class="slider-track-outer" style="--slider-fade:#0B1D3A;margin-top:16px">
+        <div class="slider-track slider-track-reverse">
+          <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#059669">GI</div>
+          <div><div class="wa-name">Gianna</div><div style="font-size:11px;color:var(--muted)">Italy</div></div>
+          <span class="wa-time">2:30 PM</span>
+        </div>
+        <p class="wa-text">The course is really good! Every topic was explained clearly and at the right depth for the IMAT. The practice questions after each chapter helped me consolidate what I learned. Highly recommended for anyone serious about getting into Italian medical school.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#B45309">LU</div>
+          <div><div class="wa-name">Luca</div><div style="font-size:11px;color:var(--muted)">Italy</div></div>
+          <span class="wa-time">5:15 PM</span>
+        </div>
+        <p class="wa-text">Really good course. The structured approach to the IMAT syllabus is exactly what I needed. Yousaf breaks down even the most complex topics in a way that is easy to understand and remember. The mock tests were very useful for getting used to the exam format and timing.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#059669">AN</div>
+          <div><div class="wa-name">Anmol</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">8:49 PM</span>
+        </div>
+        <p class="wa-text">I can't explain in words how grateful I am for your course. It made it so much easier to study directly from your material instead of wasting hours searching for resources. The topical tests after every chapter and timed mock tests every Sunday are a blessing.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#8B5CF6">ND</div>
+          <div><div class="wa-name">Nadine</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
+          <span class="wa-time">10:56 PM</span>
+        </div>
+        <p class="wa-text">Before the program I was all over the place. Since I started I have become much more confident. Information is sticking better, I know what to focus on, and I can clearly identify areas where I need more work. Having that clarity has made a huge difference.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#D97706">MF</div>
+          <div><div class="wa-name">Mohd Faizan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">7:57 AM</span>
+        </div>
+        <p class="wa-text">iMedSensei made it very easy and accessible to prepare for the IMAT. The quality of the study content, dedication, recorded lectures, practice questions, mock tests, and willingness to answer every query anytime has made the MedSchool dream a real possibility.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#DC2626">ZI</div>
+          <div><div class="wa-name">Zainab Ihsan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">10:13 AM</span>
+        </div>
+        <p class="wa-text">Sir broke everything down into a clear plan with daily targets, subject-wise strategies, and mock tests every week. He taught us to think like IMAT. Critical thinking questions that used to waste 5 minutes I can now solve in 30 seconds. If you are serious about IMAT, this is worth it.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#0891B2">MD</div>
+          <div><div class="wa-name">Mohamed</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
+          <span class="wa-time">1:13 PM</span>
+        </div>
+        <p class="wa-text">Dr. Yousaf, I attended your IMAT preparation course and the experience was truly outstanding. Your teaching covers all exam topics in great depth with remarkable clarity. The frequent mock exams were invaluable for tracking my progress and building exam-day confidence.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#7C3AED">CH</div>
+          <div><div class="wa-name">Chaima</div><div style="font-size:11px;color:var(--muted)">Algeria</div></div>
+          <span class="wa-time">3:01 AM</span>
+        </div>
+        <p class="wa-text">You have such a smooth and simple way of explaining complex topics, which made learning much easier for me. You were incredibly helpful in organizing and breaking down the syllabus. I was completely lost before and didn't know where to start. Your guidance gave me the structure I needed.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#1D4ED8">MS</div>
+          <div><div class="wa-name">Muhammad Sultan</div><div style="font-size:11px;color:var(--muted)">India</div></div>
+          <span class="wa-time">11:00 AM</span>
+        </div>
+        <p class="wa-text">The program completely changed how I approach the IMAT. I went from feeling lost to having a clear daily plan. The content is exam-focused and every session builds on the previous one. Truly one of the best investments I made for my IMAT preparation.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+          <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#059669">GI</div>
+          <div><div class="wa-name">Gianna</div><div style="font-size:11px;color:var(--muted)">Italy</div></div>
+          <span class="wa-time">2:30 PM</span>
+        </div>
+        <p class="wa-text">The course is really good! Every topic was explained clearly and at the right depth for the IMAT. The practice questions after each chapter helped me consolidate what I learned. Highly recommended for anyone serious about getting into Italian medical school.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#B45309">LU</div>
+          <div><div class="wa-name">Luca</div><div style="font-size:11px;color:var(--muted)">Italy</div></div>
+          <span class="wa-time">5:15 PM</span>
+        </div>
+        <p class="wa-text">Really good course. The structured approach to the IMAT syllabus is exactly what I needed. Yousaf breaks down even the most complex topics in a way that is easy to understand and remember. The mock tests were very useful for getting used to the exam format and timing.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#059669">AN</div>
+          <div><div class="wa-name">Anmol</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">8:49 PM</span>
+        </div>
+        <p class="wa-text">I can't explain in words how grateful I am for your course. It made it so much easier to study directly from your material instead of wasting hours searching for resources. The topical tests after every chapter and timed mock tests every Sunday are a blessing.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#8B5CF6">ND</div>
+          <div><div class="wa-name">Nadine</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
+          <span class="wa-time">10:56 PM</span>
+        </div>
+        <p class="wa-text">Before the program I was all over the place. Since I started I have become much more confident. Information is sticking better, I know what to focus on, and I can clearly identify areas where I need more work. Having that clarity has made a huge difference.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#D97706">MF</div>
+          <div><div class="wa-name">Mohd Faizan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">7:57 AM</span>
+        </div>
+        <p class="wa-text">iMedSensei made it very easy and accessible to prepare for the IMAT. The quality of the study content, dedication, recorded lectures, practice questions, mock tests, and willingness to answer every query anytime has made the MedSchool dream a real possibility.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#DC2626">ZI</div>
+          <div><div class="wa-name">Zainab Ihsan</div><div style="font-size:11px;color:var(--muted)">Pakistan — May Batch 2026</div></div>
+          <span class="wa-time">10:13 AM</span>
+        </div>
+        <p class="wa-text">Sir broke everything down into a clear plan with daily targets, subject-wise strategies, and mock tests every week. He taught us to think like IMAT. Critical thinking questions that used to waste 5 minutes I can now solve in 30 seconds. If you are serious about IMAT, this is worth it.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#0891B2">MD</div>
+          <div><div class="wa-name">Mohamed</div><div style="font-size:11px;color:var(--muted)">Egypt</div></div>
+          <span class="wa-time">1:13 PM</span>
+        </div>
+        <p class="wa-text">Dr. Yousaf, I attended your IMAT preparation course and the experience was truly outstanding. Your teaching covers all exam topics in great depth with remarkable clarity. The frequent mock exams were invaluable for tracking my progress and building exam-day confidence.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#7C3AED">CH</div>
+          <div><div class="wa-name">Chaima</div><div style="font-size:11px;color:var(--muted)">Algeria</div></div>
+          <span class="wa-time">3:01 AM</span>
+        </div>
+        <p class="wa-text">You have such a smooth and simple way of explaining complex topics, which made learning much easier for me. You were incredibly helpful in organizing and breaking down the syllabus. I was completely lost before and didn't know where to start. Your guidance gave me the structure I needed.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+      <div class="slide-wa-bubble">
+        <div class="wa-bubble-header">
+          <div class="wa-avatar" style="background:#1D4ED8">MS</div>
+          <div><div class="wa-name">Muhammad Sultan</div><div style="font-size:11px;color:var(--muted)">India</div></div>
+          <span class="wa-time">11:00 AM</span>
+        </div>
+        <p class="wa-text">The program completely changed how I approach the IMAT. I went from feeling lost to having a clear daily plan. The content is exam-focused and every session builds on the previous one. Truly one of the best investments I made for my IMAT preparation.</p>
+        <div class="wa-check">✓✓</div>
+      </div>
+        </div>
       </div>
     </div>
 
     <hr class="section-divider">
 
     <div class="section-eyebrow" style="margin-bottom:24px"><span>Video Testimonials</span></div>
-    <div class="video-grid fade-in">
+    <!-- DESKTOP VIDEO GRID -->
+    <div class="video-grid video-grid-desktop fade-in">
       <a href="https://youtube.com/shorts/bGFmHtYdeKU" target="_blank" class="video-card" style="text-decoration:none">
-        <div class="video-thumb" style="background:#000;overflow:hidden;position:relative">
-          <img src="https://img.youtube.com/vi/bGFmHtYdeKU/hqdefault.jpg" alt="Student testimonial" style="width:100%;height:100%;object-fit:cover;opacity:0.85">
-          <div class="play-btn" style="position:absolute"><div class="play-icon"></div></div>
+        <div class="video-thumb">
+          <img src="https://img.youtube.com/vi/bGFmHtYdeKU/hqdefault.jpg" alt="Student Testimonial">
+          <div class="play-btn"><div class="play-icon"></div></div>
         </div>
         <div class="video-info">
           <h4>Student Testimonial</h4>
-          <p>Real experience with IMAT Sensei preparation</p>
+          <p>Real experience with IMAT Sensei</p>
         </div>
       </a>
       <a href="https://youtube.com/shorts/QLU1L-pkRik" target="_blank" class="video-card" style="text-decoration:none">
-        <div class="video-thumb" style="background:#000;overflow:hidden;position:relative">
-          <img src="https://img.youtube.com/vi/QLU1L-pkRik/hqdefault.jpg" alt="Student testimonial" style="width:100%;height:100%;object-fit:cover;opacity:0.85">
-          <div class="play-btn" style="position:absolute"><div class="play-icon"></div></div>
+        <div class="video-thumb">
+          <img src="https://img.youtube.com/vi/QLU1L-pkRik/hqdefault.jpg" alt="Student Testimonial">
+          <div class="play-btn"><div class="play-icon"></div></div>
         </div>
         <div class="video-info">
           <h4>Student Testimonial</h4>
@@ -793,9 +1257,9 @@ footer{background:#040d1a;padding:40px 24px;text-align:center}
         </div>
       </a>
       <a href="https://youtu.be/A8Shc_FUE8w" target="_blank" class="video-card" style="text-decoration:none">
-        <div class="video-thumb" style="background:#000;overflow:hidden;position:relative">
-          <img src="https://img.youtube.com/vi/A8Shc_FUE8w/hqdefault.jpg" alt="Student testimonial" style="width:100%;height:100%;object-fit:cover;opacity:0.85">
-          <div class="play-btn" style="position:absolute"><div class="play-icon"></div></div>
+        <div class="video-thumb">
+          <img src="https://img.youtube.com/vi/A8Shc_FUE8w/hqdefault.jpg" alt="IMAT Preparation Review">
+          <div class="play-btn"><div class="play-icon"></div></div>
         </div>
         <div class="video-info">
           <h4>IMAT Preparation Review</h4>
@@ -803,15 +1267,103 @@ footer{background:#040d1a;padding:40px 24px;text-align:center}
         </div>
       </a>
       <a href="https://youtu.be/KxcCqbSxIHo" target="_blank" class="video-card" style="text-decoration:none">
-        <div class="video-thumb" style="background:#000;overflow:hidden;position:relative">
-          <img src="https://img.youtube.com/vi/KxcCqbSxIHo/hqdefault.jpg" alt="Student testimonial" style="width:100%;height:100%;object-fit:cover;opacity:0.85">
-          <div class="play-btn" style="position:absolute"><div class="play-icon"></div></div>
+        <div class="video-thumb">
+          <img src="https://img.youtube.com/vi/KxcCqbSxIHo/hqdefault.jpg" alt="How Yousaf Got Full Marks in Biology">
+          <div class="play-btn"><div class="play-icon"></div></div>
         </div>
         <div class="video-info">
           <h4>How Yousaf Got Full Marks in Biology</h4>
-          <p>Proven strategies for Biology section mastery</p>
+          <p>Proven strategies for Biology mastery</p>
         </div>
       </a>
+    </div>
+
+    <!-- MOBILE VIDEO SLIDER -->
+    <div class="video-slider-section">
+      <div class="slider-track-outer" style="--slider-fade:#0B1D3A">
+        <div class="slider-track" style="animation-duration:25s">
+          <a href="https://youtube.com/shorts/bGFmHtYdeKU" target="_blank" class="slide-video-card" style="text-decoration:none">
+        <div class="slide-video-thumb">
+          <img src="https://img.youtube.com/vi/bGFmHtYdeKU/hqdefault.jpg" alt="Student Testimonial">
+          <div class="slide-play-btn"><div class="slide-play-icon"></div></div>
+        </div>
+        <div class="slide-video-info">
+          <h4>Student Testimonial</h4>
+          <p>Real experience with IMAT Sensei</p>
+        </div>
+      </a>
+      <a href="https://youtube.com/shorts/QLU1L-pkRik" target="_blank" class="slide-video-card" style="text-decoration:none">
+        <div class="slide-video-thumb">
+          <img src="https://img.youtube.com/vi/QLU1L-pkRik/hqdefault.jpg" alt="Student Testimonial">
+          <div class="slide-play-btn"><div class="slide-play-icon"></div></div>
+        </div>
+        <div class="slide-video-info">
+          <h4>Student Testimonial</h4>
+          <p>Taha Grissa from Tunisia shares his journey</p>
+        </div>
+      </a>
+      <a href="https://youtu.be/A8Shc_FUE8w" target="_blank" class="slide-video-card" style="text-decoration:none">
+        <div class="slide-video-thumb">
+          <img src="https://img.youtube.com/vi/A8Shc_FUE8w/hqdefault.jpg" alt="IMAT Preparation Review">
+          <div class="slide-play-btn"><div class="slide-play-icon"></div></div>
+        </div>
+        <div class="slide-video-info">
+          <h4>IMAT Preparation Review</h4>
+          <p>How the mentorship made the difference</p>
+        </div>
+      </a>
+      <a href="https://youtu.be/KxcCqbSxIHo" target="_blank" class="slide-video-card" style="text-decoration:none">
+        <div class="slide-video-thumb">
+          <img src="https://img.youtube.com/vi/KxcCqbSxIHo/hqdefault.jpg" alt="How Yousaf Got Full Marks in Biology">
+          <div class="slide-play-btn"><div class="slide-play-icon"></div></div>
+        </div>
+        <div class="slide-video-info">
+          <h4>How Yousaf Got Full Marks in Biology</h4>
+          <p>Proven strategies for Biology mastery</p>
+        </div>
+      </a>
+          <a href="https://youtube.com/shorts/bGFmHtYdeKU" target="_blank" class="slide-video-card" style="text-decoration:none">
+        <div class="slide-video-thumb">
+          <img src="https://img.youtube.com/vi/bGFmHtYdeKU/hqdefault.jpg" alt="Student Testimonial">
+          <div class="slide-play-btn"><div class="slide-play-icon"></div></div>
+        </div>
+        <div class="slide-video-info">
+          <h4>Student Testimonial</h4>
+          <p>Real experience with IMAT Sensei</p>
+        </div>
+      </a>
+      <a href="https://youtube.com/shorts/QLU1L-pkRik" target="_blank" class="slide-video-card" style="text-decoration:none">
+        <div class="slide-video-thumb">
+          <img src="https://img.youtube.com/vi/QLU1L-pkRik/hqdefault.jpg" alt="Student Testimonial">
+          <div class="slide-play-btn"><div class="slide-play-icon"></div></div>
+        </div>
+        <div class="slide-video-info">
+          <h4>Student Testimonial</h4>
+          <p>Taha Grissa from Tunisia shares his journey</p>
+        </div>
+      </a>
+      <a href="https://youtu.be/A8Shc_FUE8w" target="_blank" class="slide-video-card" style="text-decoration:none">
+        <div class="slide-video-thumb">
+          <img src="https://img.youtube.com/vi/A8Shc_FUE8w/hqdefault.jpg" alt="IMAT Preparation Review">
+          <div class="slide-play-btn"><div class="slide-play-icon"></div></div>
+        </div>
+        <div class="slide-video-info">
+          <h4>IMAT Preparation Review</h4>
+          <p>How the mentorship made the difference</p>
+        </div>
+      </a>
+      <a href="https://youtu.be/KxcCqbSxIHo" target="_blank" class="slide-video-card" style="text-decoration:none">
+        <div class="slide-video-thumb">
+          <img src="https://img.youtube.com/vi/KxcCqbSxIHo/hqdefault.jpg" alt="How Yousaf Got Full Marks in Biology">
+          <div class="slide-play-btn"><div class="slide-play-icon"></div></div>
+        </div>
+        <div class="slide-video-info">
+          <h4>How Yousaf Got Full Marks in Biology</h4>
+          <p>Proven strategies for Biology mastery</p>
+        </div>
+      </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -921,5 +1473,15 @@ document.querySelectorAll('.fade-in,.slide-left,.slide-right').forEach(function(
   observer.observe(el);
 });
 </script>
+<!-- STICKY MOBILE CTA BAR -->
+<div id="sticky-cta" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(11,29,58,0.98);border-top:1px solid rgba(201,162,39,0.3);padding:12px 16px;gap:10px">
+  <a href="https://wa.me/message/SCJN34K5T4C3E1" style="display:block;background:var(--gold);color:var(--navy);text-align:center;padding:14px;border-radius:8px;font-size:15px;font-weight:800;text-decoration:none">Enroll Now on WhatsApp →</a>
+</div>
+<style>
+@media(max-width:768px){
+  #sticky-cta{display:flex!important;flex-direction:column}
+  body{padding-bottom:72px}
+}
+</style>
 </body>
 </html>
